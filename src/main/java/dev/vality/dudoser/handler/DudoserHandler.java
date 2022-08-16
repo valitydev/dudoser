@@ -10,7 +10,7 @@ import dev.vality.dudoser.service.MailingExclusionRuleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RequiredArgsConstructor
-@Service
+@Component
 public class DudoserHandler implements MessageSenderSrv.Iface {
 
     private final MessageSendHandler messageSendHandler;

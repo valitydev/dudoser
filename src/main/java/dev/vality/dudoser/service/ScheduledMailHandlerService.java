@@ -69,7 +69,7 @@ public class ScheduledMailHandlerService {
         messageDao.deleteMessages(Instant.now().minus(failTime, ChronoUnit.MINUTES), false);
     }
 
-    public void sendInternal() {
+    private void sendInternal() {
         List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
         log.info("Mail sending started... Messages to send: {}", unsentMessages.size());
 
