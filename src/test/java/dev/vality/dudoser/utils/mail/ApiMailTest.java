@@ -1,7 +1,7 @@
 package dev.vality.dudoser.utils.mail;
 
 import dev.vality.damsel.message_sender.*;
-import dev.vality.dudoser.AbstractIntegrationTest;
+import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import dev.vality.woody.api.event.ClientEventListener;
 import dev.vality.woody.api.event.CompositeClientEventListener;
 import dev.vality.woody.api.generator.IdGenerator;
@@ -31,7 +31,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @TestPropertySource(locations = "classpath:test.properties")
-public class ApiMailTest extends AbstractIntegrationTest {
+public class ApiMailTest extends AbstractPostgreTestContainerConfig {
 
     @Value("${mail.port}")
     private int mailPort;

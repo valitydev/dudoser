@@ -1,6 +1,6 @@
 package dev.vality.dudoser.dao;
 
-import dev.vality.dudoser.AbstractIntegrationTest;
+import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import dev.vality.dudoser.dao.model.MessageToSend;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ import java.util.UUID;
         "message.schedule.clear.sent=20000",
         "message.schedule.clear.failed=20000",
 })
-public class MessageDaoImplTest extends AbstractIntegrationTest {
+public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
 
     @Autowired
     MessageDao messageDao;

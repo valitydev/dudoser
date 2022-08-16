@@ -64,7 +64,8 @@ public class MailingExclusionRuleDaoImpl extends NamedParameterJdbcDaoSupport im
         } catch (Exception e) {
             throw new DaoException("Error occurred during getting exclusion rule id = " + id, e);
         }
-        Optional<MailingExclusionRule> exclusionRule =  exclusionRules.isEmpty() ? Optional.empty() : Optional.of(exclusionRules.get(0));
+        Optional<MailingExclusionRule> exclusionRule =
+                exclusionRules.isEmpty() ? Optional.empty() : Optional.of(exclusionRules.get(0));
         log.debug("Got exclusion rule {}", exclusionRule);
         return exclusionRule;
     }

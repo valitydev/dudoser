@@ -3,7 +3,7 @@ package dev.vality.dudoser.service;
 import dev.vality.damsel.domain.*;
 import dev.vality.damsel.payment_processing.Invoice;
 import dev.vality.damsel.payment_processing.InvoicePayment;
-import dev.vality.dudoser.AbstractIntegrationTest;
+import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import dev.vality.dudoser.dao.model.PaymentPayer;
 import dev.vality.dudoser.utils.Converter;
 import dev.vality.geck.common.util.TypeUtil;
@@ -20,7 +20,7 @@ import static io.github.benas.randombeans.api.EnhancedRandom.random;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
-public class PaymentPayerServiceTest extends AbstractIntegrationTest {
+public class PaymentPayerServiceTest  extends AbstractPostgreTestContainerConfig {
 
     @MockBean
     private PartyManagementService partyManagementService;

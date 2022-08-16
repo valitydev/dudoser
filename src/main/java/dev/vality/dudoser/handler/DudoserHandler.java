@@ -61,7 +61,8 @@ public class DudoserHandler implements MessageSenderSrv.Iface {
     public MessageExclusionObject getExclusionRule(MessageExclusionRef messageExclusionRef)
             throws TException {
         try {
-            Optional<MailingExclusionRule> result = mailingExclusionRuleService.getExclusionRule(messageExclusionRef.id);
+            Optional<MailingExclusionRule> result =
+                    mailingExclusionRuleService.getExclusionRule(messageExclusionRef.id);
             if (result.isEmpty()) {
                 throw new ExclusionNotFound();
             }
@@ -101,7 +102,8 @@ public class DudoserHandler implements MessageSenderSrv.Iface {
     @Override
     public void removeExclusionRule(MessageExclusionRef messageExclusionRef) throws TException {
         try {
-            Optional<MailingExclusionRule> result = mailingExclusionRuleService.getExclusionRule(messageExclusionRef.id);
+            Optional<MailingExclusionRule> result =
+                    mailingExclusionRuleService.getExclusionRule(messageExclusionRef.id);
             if (result.isEmpty()) {
                 throw new ExclusionNotFound();
             }

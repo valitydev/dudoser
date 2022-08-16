@@ -28,7 +28,11 @@ public abstract class AbstractKafkaTestContainerConfig extends AbstractPostgreTe
         @Override
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
             TestPropertyValues.of(
-                    "spring.kafka.bootstrap-servers=" + KAFKA.getBootstrapServers()
+                    "kafka.bootstrap-servers=" + KAFKA.getBootstrapServers(),
+                    "kafka.topics.invoice.enabled=true",
+                    "kafka.consumer.auto-offset-reset=earliest",
+                    "bm.pollingEnabled=false",
+                    "dmt.polling.enable=false"
             ).applyTo(configurableApplicationContext);
         }
     }

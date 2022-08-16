@@ -1,6 +1,6 @@
 package dev.vality.dudoser.dao;
 
-import dev.vality.dudoser.AbstractIntegrationTest;
+import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TemplateDaoImplTest extends AbstractIntegrationTest {
+public class TemplateDaoImplTest extends AbstractPostgreTestContainerConfig {
 
     private static final String SUBJECT = "Invoice № %s from %s for amount %s. was successfully paid";
 

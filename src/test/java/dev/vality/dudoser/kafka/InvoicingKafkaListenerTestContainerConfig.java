@@ -2,6 +2,7 @@ package dev.vality.dudoser.kafka;
 
 import dev.vality.damsel.payment_processing.EventPayload;
 import dev.vality.damsel.payment_processing.InvoiceChange;
+import dev.vality.dudoser.config.AbstractKafkaTestContainerConfig;
 import dev.vality.dudoser.configuration.KafkaConfig;
 import dev.vality.dudoser.listener.InvoicingKafkaListener;
 import dev.vality.dudoser.service.HandlerManager;

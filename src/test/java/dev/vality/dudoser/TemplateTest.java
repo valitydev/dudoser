@@ -1,5 +1,6 @@
 package dev.vality.dudoser;
 
+import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import dev.vality.dudoser.dao.model.Content;
 import dev.vality.dudoser.dao.model.PaymentPayer;
 import dev.vality.dudoser.service.TemplateService;
@@ -15,7 +16,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TemplateTest extends AbstractIntegrationTest {
+public class TemplateTest extends AbstractPostgreTestContainerConfig {
 
     @Autowired
     private TemplateService templateService;
