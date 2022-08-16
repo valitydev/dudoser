@@ -5,11 +5,8 @@
 ### Оглавление:
 
 1. [Полезные ссылки](docs/useful_links.md)
-1. [FAQ](docs/faq.md)
+2. [FAQ](docs/faq.md)
 
-
----
-[Журнал изменений](CHANGELOG.md)
 
 ### TODO
 

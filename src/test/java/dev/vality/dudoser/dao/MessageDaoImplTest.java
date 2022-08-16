@@ -2,7 +2,6 @@ package dev.vality.dudoser.dao;
 
 import dev.vality.dudoser.config.AbstractPostgreTestContainerConfig;
 import dev.vality.dudoser.dao.model.MessageToSend;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +15,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {
@@ -43,16 +45,16 @@ public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
         messageDao.store("jenya@toxic.ru", "Today is a toxic day", "text!".repeat(255));
 
         List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
-        Assert.assertEquals(2, unsentMessages.size()); // subject primary key test
-        unsentMessages.forEach(message -> Assert.assertFalse(message.getSent()));
+        assertEquals(2, unsentMessages.size()); // subject primary key test
+        unsentMessages.forEach(message -> assertFalse(message.getSent()));
 
         messageDao.markAsSent(unsentMessages);
         unsentMessages = messageDao.getUnsentMessages();
-        Assert.assertEquals(0, unsentMessages.size()); // test mark as sent
+        assertEquals(0, unsentMessages.size()); // test mark as sent
 
         messageDao.deleteMessages(Instant.now().plus(10, ChronoUnit.DAYS), true);
         List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT * FROM dudos.mailing_list");
-        Assert.assertEquals(0, list.size()); //delete works
+        assertEquals(0, list.size()); //delete works
     }
 
     @Test
@@ -60,15 +62,15 @@ public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
     public void messageClearingTest() {
         messageDao.store("jenya@toxic.ru", "Today is a toxic day", "text!".repeat(255));
         List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
-        Assert.assertEquals(1, unsentMessages.size()); // subject primary key test
+        assertEquals(1, unsentMessages.size()); // subject primary key test
 
         messageDao.deleteMessages(Instant.now().plus(1, ChronoUnit.MINUTES), false);
 
         unsentMessages = messageDao.getUnsentMessages();
-        Assert.assertEquals(0, unsentMessages.size()); // deleted unsent messages
+        assertEquals(0, unsentMessages.size()); // deleted unsent messages
 
         List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT * FROM dudos.mailing_list");
-        Assert.assertEquals(0, list.size()); //delete works
+        assertEquals(0, list.size()); //delete works
     }
 
     @Test
@@ -78,7 +80,7 @@ public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
             messageDao.store("jenya@toxic.ru", UUID.randomUUID().toString(), "text!".repeat(255));
         }
         List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
-        Assert.assertEquals(100L, unsentMessages.size());
+        assertEquals(100L, unsentMessages.size());
     }
 
     @Test
@@ -88,7 +90,7 @@ public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
         }
         new Thread(() -> transactionTemplate.execute(status -> {
             List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
-            Assert.assertEquals(50L, unsentMessages.size());
+            assertEquals(50L, unsentMessages.size());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -107,7 +109,7 @@ public class MessageDaoImplTest extends AbstractPostgreTestContainerConfig {
         //checking locked rows
         transactionTemplate.execute(status -> {
             List<MessageToSend> unsentMessages = messageDao.getUnsentMessages();
-            Assert.assertEquals(0L, unsentMessages.size());
+            assertEquals(0L, unsentMessages.size());
             return null;
         });
     }
