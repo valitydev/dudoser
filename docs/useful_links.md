@@ -18,17 +18,17 @@
 ### Thrift
 
 - [Официальная страница](https://thrift.apache.org)
-- [thrift](https://github.com/rbkmoney/thrift)
+- [thrift](https://github.com/valitydev/thrift)
 
 
 ### Woody Thrift
 
-- [woody_java](https://github.com/rbkmoney/woody_java)
+- [woody_java](https://github.com/valitydev/woody_java)
 
 
 ### Damsel
 
-- [damsel](https://github.com/rbkmoney/damsel)
+- [damsel](https://github.com/valitydev/damsel)
 
 
 ### Docker

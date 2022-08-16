@@ -62,7 +62,7 @@ public class TemplateTest extends AbstractPostgreTestContainerConfig {
         paymentPayer.setInvoiceId("invoiceId");
         paymentPayer.setPaymentId("paymentId");
         paymentPayer.setDate(TypeUtil.stringToLocalDateTime("2016-10-26T20:12:47.983390Z"));
-        paymentPayer.setToReceiver("i.ars@rbk.com");
+        paymentPayer.setToReceiver("i.ars@vality.dev");
         paymentPayer.setShopUrl("https://keb.test");
 
         return paymentPayer;
