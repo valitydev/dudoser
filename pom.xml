@@ -88,7 +88,7 @@
         <dependency>
             <groupId>io.github.benas</groupId>
             <artifactId>random-beans</artifactId>
-            <version>3.7.0</version>
+            <version>3.9.0</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -110,7 +110,7 @@
         <dependency>
             <groupId>no.api.freemarker</groupId>
             <artifactId>freemarker-java8</artifactId>
-            <version>1.1.5</version>
+            <version>1.3.0</version>
         </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId>
@@ -155,7 +155,7 @@
         <dependency>
             <groupId>dev.vality</groupId>
             <artifactId>machinegun-proto</artifactId>
-            <version>1.40-a411c7d</version>
+            <version>1.41-96f7f11</version>
         </dependency>
 
         <!--Test libs-->
@@ -231,7 +231,7 @@
             <plugin>
                 <groupId>ru.concerteza.buildnumber</groupId>
                 <artifactId>maven-jgit-buildnumber-plugin</artifactId>
-                <version>1.2.9</version>
+                <version>1.2.10</version>
                 <executions>
                     <execution>
                         <id>git-buildnumber</id>
@@ -245,7 +245,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.7.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.shared</groupId>
