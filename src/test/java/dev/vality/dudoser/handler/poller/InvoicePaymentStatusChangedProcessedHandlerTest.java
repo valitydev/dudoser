@@ -1,0 +1,86 @@
+package dev.vality.dudoser.handler.poller;
+
+import dev.vality.damsel.payment_processing.Invoice;
+import dev.vality.damsel.payment_processing.InvoiceChange;
+import dev.vality.damsel.payment_processing.InvoicePaymentChange;
+import dev.vality.dudoser.dao.Template;
+import dev.vality.dudoser.dao.TemplateDao;
+import dev.vality.dudoser.dao.model.PaymentPayer;
+import dev.vality.dudoser.service.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+public class InvoicePaymentStatusChangedProcessedHandlerTest {
+
+    @InjectMocks
+    private InvoicePaymentStatusChangedProcessedHandler handler;
+
+    @Mock
+    private InvoicingService invoicingService;
+    @Mock
+    private PaymentPayerService paymentPayerService;
+    @Mock
+    private TemplateDao templateDao;
+    @Mock
+    private TemplateService templateService;
+    @Mock
+    private MailingExclusionRuleService mailingExclusionRuleService;
+    @Mock
+    private ScheduledMailHandlerService mailHandlerService;
+
+    @Captor
+    private ArgumentCaptor<String> subject;
+
+    @Test
+    public void shouldFormatDateInSubject() {
+        // Given
+        PaymentPayer payment = PaymentPayer.builder()
+                .invoiceId("invoice-id")
+                .partyId("party-id")
+                .shopId("shop-id")
+                .toReceiver("to-receiver")
+                .amount(BigDecimal.ONE)
+                .currency("RUB")
+                .date(LocalDateTime.of(2019, Month.JANUARY, 7, 21, 0, 30))
+                .build();
+
+        when(invoicingService.get(any(), any()))
+                .thenReturn(new Invoice());
+        when(paymentPayerService.convert(any(), any(), any()))
+                .thenReturn(payment);
+        when(mailingExclusionRuleService.getExclusionRulesByShopId(payment.getShopId())).thenReturn(new ArrayList<>());
+        when(templateDao.getTemplateBodyByMerchShopParams(any(), any(), any()))
+                .thenReturn(new Template("body", null, true));
+        when(templateService.getFilledContent(any(), any()))
+                .thenReturn("content");
+        String sourceId = "source-id";
+        Long sequenceId = 0L;
+        InvoiceChange invoiceChange = InvoiceChange.invoice_payment_change(
+                new InvoicePaymentChange(
+                        new InvoicePaymentChange()
+                                .setId("id")));
+
+        // When
+        handler.handle(invoiceChange, sourceId, sequenceId);
+
+        // Then
+        verify(mailHandlerService).storeMessage(any(), subject.capture(), any());
+        assertThat(subject.getValue()).containsOnlyOnce("07.01.2019 21:00");
+    }
+}

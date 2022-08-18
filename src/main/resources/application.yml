@@ -9,15 +9,10 @@ info:
     version: '@damsel.version@'
 
 management:
-  security:
-    flag: false
   server:
     port: '@management.port@'
   metrics:
     export:
-      statsd:
-        flavor: etsy
-        enabled: false
       prometheus:
         enabled: false
   endpoint:
@@ -75,17 +70,10 @@ message:
     concurrency: 8
 
 kafka:
-  bootstrap-servers: kenny-kafka1.bst1.rbkmoney.net:9092
+  bootstrap-servers: kenny-kafka1.bst1.vality.net:9092
   client-id: dudoser
   ssl:
     enabled: false
-  #    trust-store-location: "test"
-  #    trust-store-password: "test"
-  #    key-store-location: "test"
-  #    key-store-password: "test"
-  #    key-password: "test"
-  #    key-store-type: PKCS12
-  #    trust-store-type: PKCS12
   consumer:
     concurrency: 8
     group-id: "DudoserListener"
@@ -104,11 +92,11 @@ hellgate:
   networkTimeout: 30000
 
 mail:
-  host: rbkmoney.com
+  host: vality.dev
   port: 587
-  username: no-reply@rbkmoney.com
+  username: no-reply@vality.dev
   password: jah;qu5chaeJeoCo
-  from: no-reply@rbkmoney.com
+  from: no-reply@vality.dev
   protocol: smtp
   smtp:
     auth: true
@@ -118,18 +106,18 @@ mail:
 
 test:
   mail:
-    to: i.arsanukaev@rbkmoney.com
+    to: i.arsanukaev@vality.dev
   server:
     port: 7778
 
 notification:
   payment:
     paid:
-      from: no-reply@rbkmoney.com
+      from: no-reply@vality.dev
       fileNameTemplate: payment_paid.ftl
   create:
     invoice:
-      from: no-reply@rbkmoney.com
+      from: no-reply@vality.dev
       fileNameTemplate: create_invoice.ftl
 
 subject:

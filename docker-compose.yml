@@ -6,5 +6,3 @@ postgres:
     POSTGRES_DB: dudoser
   ports:
     - '5432:5432'
-
-
