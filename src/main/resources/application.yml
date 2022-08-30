@@ -9,6 +9,8 @@ info:
     version: '@damsel.version@'
 
 management:
+  security:
+    flag: false
   server:
     port: '@management.port@'
   metrics:
@@ -66,6 +68,7 @@ message:
       sent: 86400000 # every day
       failed: 300000 # every 5 minutes
     send: 500 # 500 ms after completion of prev. execution
+    enabled: false
   sending:
     concurrency: 8
 
