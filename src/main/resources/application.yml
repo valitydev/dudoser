@@ -101,6 +101,7 @@ mail:
   password: jah;qu5chaeJeoCo
   from: no-reply@vality.dev
   protocol: smtp
+  factory: javax.net.ssl.SSLSocketFactory
   smtp:
     auth: true
     starttls:
