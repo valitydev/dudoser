@@ -16,13 +16,17 @@ public class MailSenderConfiguration {
     public Properties mailProperties(@Value("${mail.protocol}") String protocol,
                                      @Value("${mail.smtp.auth}") boolean smtpsAuth,
                                      @Value("${mail.smtp.starttls.enable}") boolean starttls,
-                                     @Value("${mail.smtp.timeout:30000}") int timeout) {
+                                     @Value("${mail.smtp.timeout:30000}") int timeout,
+                                     @Value("${mail.port}") int port,
+                                     @Value("${mail.factory}") String factory) {
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.auth", smtpsAuth);
         javaMailProperties.put("mail.smtp.starttls.enable", starttls);
         javaMailProperties.put("mail.transport.protocol", protocol);
         javaMailProperties.put("mail.smtp.connectiontimeout", timeout);
         javaMailProperties.put("mail.smtp.timeout", timeout);
+        javaMailProperties.put("mail.smtp.socketFactory.port", port);
+        javaMailProperties.put("mail.smtp.socketFactory.class", factory);
         return javaMailProperties;
     }
 
