@@ -46,9 +46,14 @@ spring:
     hikari:
       maximum-pool-size: 3
       idle-timeout: 30000
-
-retry-policy:
-  maxAttempts: -1
+  kafka:
+    bootstrap-servers: kenny-kafka1.bst1.vality.net:9092
+    client-id: dudoser
+    consumer:
+      group-id: DudoserListener
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      max-poll-records: 20
 
 db:
   jdbc:
@@ -73,16 +78,8 @@ message:
     concurrency: 8
 
 kafka:
-  bootstrap-servers: kenny-kafka1.bst1.vality.net:9092
-  client-id: dudoser
-  ssl:
-    enabled: false
   consumer:
     concurrency: 8
-    group-id: "DudoserListener"
-    enable-auto-commit: false
-    auto-offset-reset: latest
-    max-poll-records: 20
   topics:
     invoice:
       id: mg-invoice-100-2
